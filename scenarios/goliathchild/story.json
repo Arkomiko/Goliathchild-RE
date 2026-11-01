@@ -1,0 +1,19 @@
+{
+	"id": "goliathchild",
+	"title": "Goliathchild",
+	"author": "handakote, YtrogGrenada, Я.Д.Белковый, Arkomiko, Tov. Hrom, Ed Dumbhead",
+	"version": "0.3.0-re",
+	"description": "Посылка без обратного адреса. Старый жёсткий диск. Наклейка «Не бойтесь». Основной сюжет GoliathChild:RE, перенесённый из прототипа LDJAM 2023.",
+	"rating": "16+",
+	"start": "start",
+	"language": "ru",
+	"languages": ["ru"],
+	"presenter": "os",
+	"readOnly": true,
+	"chapters": [
+		{ "id": "prologue", "title": "Пролог", "label": "start" },
+		{ "id": "act1", "title": "Акт I", "label": "chapter_act1" },
+		{ "id": "act2", "title": "Акт II", "label": "chapter_act2" },
+		{ "id": "act3", "title": "Акт III", "label": "chapter_act3" }
+	]
+}

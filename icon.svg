@@ -1,0 +1,14 @@
+<!-- Иконка GoliathChild:RE: глаза Ренатуса на бирюзовом фоне старой игры. Векторная, чтобы Godot сам делал нужные размеры. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="40" fill="#2c99a3"/>
+  <path d="M22 132 Q58 92 108 104 Q120 116 112 140 Q70 156 22 132 Z" fill="#000"/>
+  <path d="M234 132 Q198 92 148 104 Q136 116 144 140 Q186 156 234 132 Z" fill="#000"/>
+  <circle cx="84" cy="124" r="20" fill="#fff"/>
+  <circle cx="172" cy="124" r="20" fill="#fff"/>
+  <circle cx="80" cy="122" r="6" fill="#000"/>
+  <circle cx="168" cy="122" r="6" fill="#000"/>
+  <path d="M30 92 Q70 80 112 86" stroke="#000" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M226 92 Q186 80 144 86" stroke="#000" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <rect x="0" y="190" width="256" height="8" fill="#ff2a5f" opacity="0.65"/>
+  <rect x="40" y="206" width="216" height="4" fill="#33e1ff" opacity="0.55"/>
+</svg>

@@ -1,0 +1,20 @@
+# Единые переводы строк в текстовых файлах, чтобы git не показывал лишних изменений между Windows и Linux
+* text=auto eol=lf
+*.cs text eol=lf
+*.gics text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.gdshader text eol=lf
+*.sln text eol=crlf
+
+# Бинарные ассеты: git не должен пытаться их сравнивать построчно
+*.png binary
+*.jpg binary
+*.ogg binary
+*.wav binary
+*.mp3 binary
+*.ttf binary
+*.ico binary
+*.sdrom_save binary

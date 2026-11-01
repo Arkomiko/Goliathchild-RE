@@ -1,0 +1,36 @@
+# Автоматически перенесено из Ren'Py (script.rpy, Goliathchild v0.3.0, LDJAM 2023)
+# инструментом tools/rpy2gics.py. Правки текста лучше вносить здесь, а не в старом файле.
+
+# Персонажи. Имя "[doc]" означает: в заголовке окна показывается имя текущего документа.
+# voice — мелодия, которая звучит, пока печатается реплика (как callback в оригинале).
+
+character al "[doc]" color=#000000 voice="old2023/audio/Alice.ogg"  # Алиса (ник Celia)
+character ki "[doc]" color=#000000 voice="old2023/audio/Kira.ogg"  # Кирилл (Kira)
+character sc "[doc]" color=#000000 voice="old2023/audio/ScHill.ogg"  # Шилл (SchHill)
+character ch "[doc]" color=#000000 voice="old2023/audio/Chopin.ogg"  # Шопен (Chopin)
+character ge "[doc]" color=#000000 voice="old2023/audio/Geirby.ogg"  # Гирби (Geirby_geirby)
+character re "[doc]" color=#000000 voice="old2023/audio/Renatus.ogg"  # Ренатус (REN)
+character he "[doc]" color=#000000 voice="old2023/audio/RenLaugh.ogg"  # Смех Ренатуса
+character appeal "Мое обращение" color=#000000
+character prolegomena "prolegomena.doc" color=#000000
+character _1log "1log.doc" color=#000000
+character _4log "4.log" color=#000000
+character x_mas "Описание объекта №12 <XmasGift.exe>.doc" color=#000000
+character _7log "7.log" color=#000000
+character mnogo_cifr "143333333333.doc" color=#000000
+character _8log "8.log" color=#000000
+character _02_05_1 "02.05.1" color=#000000
+character _05_05_1 "05.05.1" color=#000000
+character _06_05_1 "06.05.1" color=#000000
+character _20_05_1 "20.05.1" color=#000000
+character points "[[...]" color=#000000
+character _21_05_1 "21.05.1" color=#000000
+character _29_05_0001 "_29_05_0001" color=#000000
+character _28_05_01 "28.05.01" color=#000000
+character _25_05_1 "25.05.1" color=#000000
+character short25 "“Краткое наблюдение за 25-е мая”" color=#000000
+character _26_05_1 "26.05.1" color=#000000
+character _27_05_1 "27.05.1 Утро" color=#000000
+character _29_05_1 "29.05.1" color=#000000
+character _01_06_1 "01.06.1" color=#000000
+character _02_06_1 "02.06.1" color=#000000

@@ -1,0 +1,25 @@
+<!--
+  Проект C# для Godot 4.7.2 (.NET).
+  Godot.NET.Sdk подключает сборку GodotSharp и генераторы кода для узлов, сигналов и экспортов.
+-->
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <!-- .NET 8 — минимальная версия для Godot 4.7 на ПК. Android и iOS требуют .NET 9. -->
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net9.0</TargetFramework>
+    <!-- Нужно Godot, чтобы перезагружать сборку без перезапуска редактора. -->
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>GoliathChildRE</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <!-- Предупреждения о null отключены: Godot сам создаёт узлы, и анализатор даёт ложные срабатывания. -->
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Папки с архивом оригинала, документацией и инструментами не компилируем. -->
+    <Compile Remove="OLD/**" />
+    <Compile Remove="tools/**" />
+    <Compile Remove="docs/**" />
+    <Compile Remove="stories/**" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,31 @@
+# Служебные файлы Godot: кэш импорта и сборки пересоздаются автоматически
+.godot/
+.import/
+*.translation
+
+# Сборки C# (.NET): bin/obj генерируются при каждой компиляции
+.mono/
+bin/
+obj/
+*.user
+
+# Архив оригинала 2023 года: 1,6 ГБ бинарников, в репозиторий кладём только описание
+OLD/*
+!OLD/README.md
+!OLD/.gdignore
+
+# Экспортированные сборки игры
+builds/
+export_presets.cfg
+
+# Пользовательские истории игроков (в репозитории только пример и README)
+stories/*
+!stories/README.md
+!stories/example_story/
+
+# Мусор ОС и редакторов
+.DS_Store
+Thumbs.db
+desktop.ini
+.vs/
+.idea/

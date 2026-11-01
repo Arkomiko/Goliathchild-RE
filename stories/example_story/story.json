@@ -1,0 +1,22 @@
+{
+	"id": "example_story",
+	"title": "Пример: секретный архив",
+	"author": "sola creators",
+	"version": "1.0",
+	"description": "Короткий пример истории для GiC_OS: иконки на рабочем столе, документ, архив с паролем и выбор в конце.",
+	"rating": "0+",
+	"start": "start",
+	"language": "ru",
+	"languages": [
+		"ru"
+	],
+	"presenter": "os",
+	"readOnly": false,
+	"chapters": [
+		{
+			"id": "start",
+			"title": "Начало",
+			"label": "start"
+		}
+	]
+}

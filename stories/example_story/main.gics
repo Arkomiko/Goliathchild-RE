@@ -1,0 +1,41 @@
+# Моя история для GiC_OS.
+# Строки с # — комментарии. Подробности о формате: docs/GICS_FORMAT.md
+# Встроенные ассеты игры доступны по путям вида "old2023/images/...", свои кладите в папку assets этой истории.
+
+character me "[doc]" color=#2c99a3
+
+var opened = false
+
+label start:
+    scene "old2023/images/bg desktop.png"
+    os desktop show
+    os icon note "readme.txt" image="old2023/images/icon/txt.png" side=left action=readme
+    os icon box "secret.zip" image="old2023/images/icon/act1Z.png" side=right action=secret
+    jump wait
+
+label wait:
+    os wait
+
+label readme:
+    doc "readme.txt"
+    glitch 0.2 0.15
+    me "Привет! Это моя первая история в GiC_OS.{p=0.4}Пароль от архива — «не бойтесь»."
+    jump wait
+
+label secret:
+    if opened:
+        jump inside
+    input answer "Введите пароль"
+    if normalize(answer) == "не бойтесь":
+        set opened = true
+        jump inside
+    "Неверный пароль!"
+    jump wait
+
+label inside:
+    viewer "old2023/images/pic/1.png" wait
+    menu "Что дальше?":
+        "Вернуться на рабочий стол":
+            jump wait
+        "Закончить историю":
+            end

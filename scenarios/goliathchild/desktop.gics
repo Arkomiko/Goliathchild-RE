@@ -1,0 +1,136 @@
+# Рабочий стол виртуальной ОС, загрузка BIOS и пароли архивов.
+# В Ren'Py эта логика жила в экранах (screens.rpy), поэтому она написана вручную, а не конвертером.
+# Поведение как в прототипе 2023 года, но пароли принимаются в любом регистре и с любыми знаками препинания.
+
+var password = ""
+var act1_unlocked = false
+var act2_unlocked = false
+var act3_unlocked = false
+
+# Начало истории: пролог ремейка, потом загрузка компьютера.
+label start:
+    jump prologue
+
+# Загрузка «виртуальной машины»: два экрана BIOS и рабочий стол.
+label boot:
+    os desktop hide
+    ambient "old2023/audio/PC_Idle_loop_Intel.ogg" volume=0.3
+    show bios "old2023/images/bios2.png"
+    pause 1.0
+    show bios "old2023/images/bios1.png"
+    pause 3.0
+    hide bios
+    call desktop_setup
+    jump game
+
+# Иконки, папки архивов и файлы в них. Вызывается через call, поэтому заканчивается return.
+label desktop_setup:
+    scene "old2023/images/bg desktop.png"
+    os desktop show
+    os icon mypc "My PC" image="old2023/images/icon/mypc.png" side=left error="old2023/images/error_mypc.png"
+    os icon rebin "Recycle Bin" image="old2023/images/icon/rebin.png" side=left error="old2023/images/error_rebin.png"
+    os icon prolegomena "Prolegomena.doc" image="old2023/images/icon/txt.png" side=left action=prolegomena
+    os icon act1 "ACT1.zip" image="old2023/images/icon/act1Z.png" side=right action=act_one
+    os icon act2 "ACT2.zip" image="old2023/images/icon/act2Z.png" side=right action=act_two
+    os icon act3 "ACT3.zip" image="old2023/images/icon/act3Z.png" side=right action=act_three
+    os folder act1 "ACT1.zip"
+    os file act1 log "1log.doc" image="old2023/images/file.png" action=one_log
+    os folder act2 "ACT2.zip"
+    os file act2 log "02.05.1" image="old2023/images/file2.png" action=_02_05_1
+    os folder act3 "ACT3.zip"
+    os file act3 log "25.05.1" image="old2023/images/file3.png" action=_25_05_1
+    return
+
+# Ожидание: игрок кликает по иконкам. Каждая метка документа в конце возвращается сюда (jump game).
+label game:
+    os wait
+
+# ---------------------------------------------------------------- архив ACT1
+
+label act_one:
+    if act1_unlocked:
+        jump open_act1
+    input password "Введите пароль"
+    if normalize(password) == "cogito ergo sum":
+        set act1_unlocked = true
+        os icon act1 image="old2023/images/icon/act1.png"
+        jump open_act1
+    elif normalize(password) == "хуй":
+        "Сам такой!"
+    elif password != "":
+        "Неверный пароль!"
+    jump game
+
+label open_act1:
+    os open act1
+    jump game
+
+# ---------------------------------------------------------------- архив ACT2
+
+label act_two:
+    if act2_unlocked:
+        jump open_act2
+    input password "Введите пароль"
+    if normalize(password) == "bellum omnium contra omnes" or normalize(password) == "bellum omnium":
+        set act2_unlocked = true
+        os icon act2 image="old2023/images/icon/act2.png"
+        jump open_act2
+    elif normalize(password) == "хуй":
+        "Умнее ничего не придумал?"
+    elif password != "":
+        "Неверный пароль!"
+    jump game
+
+label open_act2:
+    os open act2
+    jump game
+
+# ---------------------------------------------------------------- архив ACT3
+
+label act_three:
+    if act3_unlocked:
+        jump open_act3
+    input password "Введите пароль"
+    if normalize(password) == "sum ergo cogito":
+        set act3_unlocked = true
+        os icon act3 image="old2023/images/icon/act3.png"
+        jump open_act3
+    elif normalize(password) == "хуй":
+        "..."
+    elif password != "":
+        "Неверный пароль!"
+    jump game
+
+label open_act3:
+    os open act3
+    jump game
+
+# ---------------------------------------------------------------- выбор главы из меню «История»
+# Каждая глава собирает рабочий стол и сразу открывает нужный архив, как будто пароли уже введены.
+
+label chapter_act1:
+    ambient "old2023/audio/PC_Idle_loop_Intel.ogg" volume=0.3
+    call desktop_setup
+    set act1_unlocked = true
+    os icon act1 image="old2023/images/icon/act1.png"
+    jump open_act1
+
+label chapter_act2:
+    ambient "old2023/audio/PC_Idle_loop_Intel.ogg" volume=0.3
+    call desktop_setup
+    set act1_unlocked = true
+    set act2_unlocked = true
+    os icon act1 image="old2023/images/icon/act1.png"
+    os icon act2 image="old2023/images/icon/act2.png"
+    jump open_act2
+
+label chapter_act3:
+    ambient "old2023/audio/PC_Idle_loop_Intel.ogg" volume=0.3
+    call desktop_setup
+    set act1_unlocked = true
+    set act2_unlocked = true
+    set act3_unlocked = true
+    os icon act1 image="old2023/images/icon/act1.png"
+    os icon act2 image="old2023/images/icon/act2.png"
+    os icon act3 image="old2023/images/icon/act3.png"
+    jump open_act3
