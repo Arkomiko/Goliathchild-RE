@@ -7,7 +7,7 @@ config_version=5
 
 config/name="GoliathChild:RE"
 config/description="Ремейк визуальной новеллы Goliathchild (LDJAM 2023) со встроенным редактором историй GiC_OS."
-config/version="0.1.0.1101a"
+config/version="0.1.1.1102a"
 run/main_scene="res://game/scenes/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GoliathChildRE"

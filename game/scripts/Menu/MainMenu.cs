@@ -19,7 +19,6 @@ public partial class MainMenu : Control
     private Control _pageHost;
     private Control _page;
     private string _pageId;
-    private TextureRect _background;
     private ColorRect _crt;
     private ColorRect _glitch;
     private ShaderMaterial _glitchMaterial;
@@ -52,21 +51,8 @@ public partial class MainMenu : Control
     {
         AddChild(UiKit.Full(new ColorRect { Color = Palette.CinemaBg }));
 
-        // Глаза Ренатуса из финала оригинала, затемнённые и медленно приближающиеся — «живой» кадр.
-        _background = UiKit.Full(new TextureRect
-        {
-            Texture = GicAssets.LoadTexture("res://assets/old2023/images/renatus.png"),
-            ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
-            StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
-            Modulate = new Color(0.30f, 0.36f, 0.38f),
-            MouseFilter = MouseFilterEnum.Ignore,
-        });
-        AddChild(_background);
-        Resized += () => _background.PivotOffset = Size / 2;
-        _background.PivotOffset = new Vector2(1280, 720);
-        var zoom = CreateTween().SetLoops();
-        zoom.TweenProperty(_background, "scale", new Vector2(1.08f, 1.08f), 24).SetTrans(Tween.TransitionType.Sine);
-        zoom.TweenProperty(_background, "scale", Vector2.One, 24).SetTrans(Tween.TransitionType.Sine);
+        // Фон зависит от прогресса сюжета (как в Portal 2) — см. MenuBackdrop.
+        AddChild(UiKit.Full(new MenuBackdrop()));
 
         // Градиент слева, чтобы пункты меню читались поверх картинки.
         var gradient = new Gradient();
