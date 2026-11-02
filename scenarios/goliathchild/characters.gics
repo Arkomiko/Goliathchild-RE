@@ -4,13 +4,13 @@
 # Персонажи. Имя "[doc]" означает: в заголовке окна показывается имя текущего документа.
 # voice — мелодия, которая звучит, пока печатается реплика (как callback в оригинале).
 
-character al "[doc]" color=#000000 voice="old2023/audio/Alice.ogg"  # Алиса (ник Celia)
-character ki "[doc]" color=#000000 voice="old2023/audio/Kira.ogg"  # Кирилл (Kira)
-character sc "[doc]" color=#000000 voice="old2023/audio/ScHill.ogg"  # Шилл (SchHill)
-character ch "[doc]" color=#000000 voice="old2023/audio/Chopin.ogg"  # Шопен (Chopin)
-character ge "[doc]" color=#000000 voice="old2023/audio/Geirby.ogg"  # Гирби (Geirby_geirby)
-character re "[doc]" color=#000000 voice="old2023/audio/Renatus.ogg"  # Ренатус (REN)
-character he "[doc]" color=#000000 voice="old2023/audio/RenLaugh.ogg"  # Смех Ренатуса
+character al "[doc]" color=#000000 voice="old2023/audio/voices/Alice.ogg"  # Алиса (ник Celia)
+character ki "[doc]" color=#000000 voice="old2023/audio/voices/Kira.ogg"  # Кирилл (Kira)
+character sc "[doc]" color=#000000 voice="old2023/audio/voices/ScHill.ogg"  # Шилл (SchHill)
+character ch "[doc]" color=#000000 voice="old2023/audio/voices/Chopin.ogg"  # Шопен (Chopin)
+character ge "[doc]" color=#000000 voice="old2023/audio/voices/Geirby.ogg"  # Гирби (Geirby_geirby)
+character re "[doc]" color=#000000 voice="old2023/audio/voices/Renatus.ogg"  # Ренатус (REN)
+character he "[doc]" color=#000000 voice="old2023/audio/voices/RenLaugh.ogg"  # Смех Ренатуса
 character appeal "Мое обращение" color=#000000
 character prolegomena "prolegomena.doc" color=#000000
 character _1log "1log.doc" color=#000000

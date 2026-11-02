@@ -14,13 +14,13 @@
 
 ```
 # Персонажи и переменные объявляются вне меток
-character ch "[doc]" color=#000000 voice="old2023/audio/Chopin.ogg"
+character ch "[doc]" color=#000000 voice="old2023/audio/voices/Chopin.ogg"
 var password = ""
 
 label start:
     doc "4.log"
     glitch 0.3 0.2
-    music "old2023/audio/OST/PixWho_i_2.ogg" volume=0.3
+    music "old2023/audio/music/PixWho_i_2.ogg" volume=0.3
     ch "Chopin: Ты на связи?{p=0.3}"
     "Реплика рассказчика"
     jump next_label

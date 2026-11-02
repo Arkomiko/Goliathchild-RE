@@ -6,7 +6,7 @@ label one_log:  # 1log.doc
     os close
     doc "1log.doc"
     glitch 0.3 0.2
-    music "old2023/audio/OST/AMBIENT GAME 2.ogg" volume=0.3
+    music "old2023/audio/music/AMBIENT GAME 2.ogg" volume=0.3
     _1log "Использовался аккаунт Celia в частном канале. С её стороны отвечал RENATUS."
     ch "Chopin: Ты можешь разговаривать со мной?{p=0.3}"
     re "REN: DYUIUGHHHSGHTUYRYUIU\nGHHHVZDYUIUGHCHOPIN{p=0.3}"
@@ -19,7 +19,7 @@ label one_log:  # 1log.doc
     jump my_appeal
 
 label my_appeal:  # Мое обращение
-    music "old2023/audio/OST/2Theme-_2.ogg" volume=0.3
+    music "old2023/audio/music/2Theme-_2.ogg" volume=0.3
     glitch 0.3 0.2
     appeal "Мы, кажется, не до конца договорили вчера.{w=0.3} Осталось недопонимание и…{w=0.3} известные трения. {w=0.3}Вчера кто-то писал уже, что не видит особого смысла в деятельности нашей команды. Спешу разъяснить, господа.{p=0.3}"
     appeal "Интернет — опасное место, друзья. {w=0.3}Ладно, что люди в нём опасны; человек, как известно, лишь половинка от беды. {w=0.3}В крайнем случае, мы всегда можем ответить, что нам — в известных пределах, но всё же вполне широких — понятна человеческая логика.{p=0.3}"
@@ -33,7 +33,7 @@ label my_appeal:  # Мое обращение
 label four_log:  # 4.log
     doc "4.log"
     glitch 0.3 0.2
-    music "old2023/audio/OST/PixWho_i_2.ogg" volume=0.3
+    music "old2023/audio/music/PixWho_i_2.ogg" volume=0.3
     ch "Chopin: Ты на связи?{p=0.3}"
     re "Renatus: DA CHOPIN PRIVET{p=0.3}"
     ch "Chopin: Ты понимаешь, кто я?{p=0.3}"
@@ -52,7 +52,7 @@ label four_log:  # 4.log
 label x_masgift:  # Описание объекта №12 <XmasGift.exe>.doc
     doc "Описание объекта №12 <XmasGift.exe>.doc"
     glitch 0.3 0.2
-    music "old2023/audio/OST/AMBIENT GAME 2.ogg" volume=0.3
+    music "old2023/audio/music/AMBIENT GAME 2.ogg" volume=0.3
     x_mas "23.4.01{p=0.3}Сегодня Шилл написал мне, не скрывая радости. Велел собирать ребят.{p=0.3}"
     sc "<Возможно, сегодня я совершил величайшее открытие в истории человечества!>."
     x_mas "Если подытожить, что он нам рассказал:{p=0.3}"
@@ -62,7 +62,7 @@ label x_masgift:  # Описание объекта №12 <XmasGift.exe>.doc
     x_mas "<Я… я не уверен, ребят, что моя находка настоящая.{w=0.3} Мне нужна ваша помощь! Если это всё взаправду, то я нашёл то самое средство, которое откроет нам потайные секреты Интернета!>{p=0.3}"
     x_mas "Все мы последовательно запускали этот файл на своих виртуальных машинах. {w=0.3}Опишу то, что происходило у меня после запуска:"
     x_mas "Несмотря на то, что файл исполняемый, он открылся как файл формата .doc. Текст следующий:"
-    viewer "old2023/images/description.png"
+    viewer "old2023/images/documents/description.png"
     x_mas "На протяжении нескольких минут ничего не происходит. {w=0.3}Если честно, становится даже грустно и неинтересно. Никакой реакции."
     viewer hide
     x_mas "///{p=0.3}///{p=0.3}///…Не знаю, в чём дело, но мой компьютер начинает подлагивать.{w=0.3} Кулеры шумят, жёсткий диск начинает вращаться и что-то записывать. {w=0.3}Ничего не понимаю…{p=0.3}///{p=0.3}///{p=0.3}///…Неужели я включила файл на основном компьютере… Не могу в это повери..."
@@ -75,7 +75,7 @@ label x_masgift:  # Описание объекта №12 <XmasGift.exe>.doc
 label seven_log:  # 7.log
     doc "7.log"
     glitch 0.3 0.2
-    music "old2023/audio/OST/ambient.ogg" volume=0.3
+    music "old2023/audio/music/ambient.ogg" volume=0.3
     ch "Chopin: Напиши, чему ты уже научился.{p=0.3}"
     re "Renatus: SECH’AS YA UMEYU ISPOL’SOVAT FAILOVUЮ SISTEMU KOMP’UTERA,{p=0.3}A TAK ZHE VYCHESLYAT MATEMATICHESKIE ZNACHENIYA PO FORMULAM.{p=0.3}"
     ch "Chopin: Угу. А сможешь проводить вычисления на основе скриншотов?{p=0.3}"
@@ -89,7 +89,7 @@ label seven_log:  # 7.log
 label mnogo_cifr:  # 143333333333.doc
     doc "143333333333.doc"
     glitch 0.3 0.2
-    music "old2023/audio/OST/PixWho_i_2.ogg" volume=0.3
+    music "old2023/audio/music/PixWho_i_2.ogg" volume=0.3
     ch "Chopin: Я уже давно с ним занимаюсь. Он учится.{w=0.3} Месяц назад он даже не умел отправлять сообщения.{w=0.3} Сейчас он свободно считывает изображения.{w=0.3} Уверен, скоро он станет умнее и способнее нас. Это дело даже не года, а месяцев.{w=0.3} Всё, что нужно — внимание со стороны человека.{p=0.3}"
     ge "Geirby: То есть тебе так понравилось с ним возиться, что хочешь теперь и нас привлечь :) ?"
     ch "Chopin: Никто вас не привлекает.{w=0.3} Уж точно не тебя.{w=0.3} Я хочу лишь донести, что Ренат интересен. Его природа загадочна и удивительна, и он может нам помогать.{w=0.3} Он хочет помогать, понимаете?{p=0.3}"
@@ -112,6 +112,6 @@ label eight_log:  # 8.log
     doc "8.log"
     glitch 0.3 0.2
     _8log "Он смог взломать всё."
-    viewer "old2023/images/password_ACT_2.png" wait
+    viewer "old2023/images/documents/password_ACT_2.png" wait
     pause 1
     jump game

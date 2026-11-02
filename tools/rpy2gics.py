@@ -59,10 +59,34 @@ WHO = {
 
 ASSET_PREFIX = "old2023/"
 
+# В ремейке ассеты оригинала разложены по назначению, а в Ren'Py лежали почти плоско.
+# Папки целиком: images/pic → иллюстрации, images/icon → иконки рабочего стола, audio/OST → музыка.
+FOLDERS = {
+    "images/pic/": "images/illustrations/",
+    "images/icon/": "images/os/icons/",
+    "audio/OST/": "audio/music/",
+}
+# Отдельные файлы из корня images/ и audio/ — по их роли в игре.
+SCREENS = {"bios1", "bios2", "renatus", "credit"}
+DOCUMENTS = {"about_site", "description", "LIKE", "page1", "page2", "web_page", "web_page1",
+             "password_ACT_1", "password_ACT_2", "password_ACT_3"}
+VOICE_FILES = {"Alice", "Chopin", "Geirby", "Kira", "Renatus", "RenLaugh", "ScHill"}
+
 
 def asset(path: str) -> str:
     """Путь из Ren'Py (images/..., audio/...) → путь во встроенных ассетах ремейка."""
-    return ASSET_PREFIX + path.lstrip("/")
+    path = path.lstrip("/")
+    for old, new in FOLDERS.items():
+        if path.startswith(old):
+            return ASSET_PREFIX + new + path[len(old):]
+    folder, _, file = path.rpartition("/")
+    name = file.rsplit(".", 1)[0]
+    if folder == "images":
+        sub = "screens" if name in SCREENS else "documents" if name in DOCUMENTS else "os"
+        return f"{ASSET_PREFIX}images/{sub}/{file}"
+    if folder == "audio":
+        return f"{ASSET_PREFIX}audio/{'voices' if name in VOICE_FILES else 'sfx'}/{file}"
+    return ASSET_PREFIX + path
 
 
 def quote(text: str) -> str:

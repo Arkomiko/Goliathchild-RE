@@ -1,5 +1,10 @@
-; Файл настроек проекта Godot.
-; Редактировать можно и руками, и через «Проект → Настройки проекта» в редакторе Godot.
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
 
@@ -7,8 +12,8 @@ config_version=5
 
 config/name="GoliathChild:RE"
 config/description="Ремейк визуальной новеллы Goliathchild (LDJAM 2023) со встроенным редактором историй GiC_OS."
-config/version="0.1.1.1102a"
-run/main_scene="res://game/scenes/Main.tscn"
+config/version="0.1.2.1102a"
+run/main_scene="res://game/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GoliathChildRE"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
@@ -19,11 +24,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 GicLocalization="*res://addons/gic_engine/Core/Localization/GicLocalization.cs"
-Settings="*res://game/autoload/SettingsManager.cs"
-InputDevices="*res://game/autoload/InputDeviceManager.cs"
-Saves="*res://game/autoload/SaveManager.cs"
-Game="*res://game/autoload/GameManager.cs"
-DevAutomation="*res://game/autoload/DevAutomation.cs"
+Settings="*res://game/Autoload/SettingsManager.cs"
+InputDevices="*res://game/Autoload/InputDeviceManager.cs"
+Saves="*res://game/Autoload/SaveManager.cs"
+Game="*res://game/Autoload/GameManager.cs"
+DevAutomation="*res://game/Autoload/DevAutomation.cs"
 
 [display]
 
@@ -31,9 +36,9 @@ window/size/viewport_width=2560
 window/size/viewport_height=1440
 window/size/window_width_override=1600
 window/size/window_height_override=900
+window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/subwindows/embed_subwindows=false
 
 [dotnet]
 

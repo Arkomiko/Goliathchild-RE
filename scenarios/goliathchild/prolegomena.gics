@@ -3,9 +3,9 @@
 
 label prolegomena:  # Prolegomena.doc
     glitch 0.3 0.2
-    music "old2023/audio/OST/PixWater_Rain.ogg" volume=0.3
+    music "old2023/audio/music/PixWater_Rain.ogg" volume=0.3
     prolegomena "presentdays.org/prol {p=0.3}FAQ, обращение и всякое прочее:"
-    viewer "old2023/images/about_site.png"
+    viewer "old2023/images/documents/about_site.png"
     prolegomena "1. О сайте:"
     viewer hide
     prolegomena "2. О разделах:{p=0.3}[[ВЫРЕЗАНО]{p=0.3}[[ВЫРЕЗАНО]{p=0.3}[[ВЫРЕЗАНО]{p=0.3}"
@@ -23,6 +23,6 @@ label prolegomena:  # Prolegomena.doc
     prolegomena "Q. Это правда, что вы изучаете различные аномалии Интернета: файлы, сайты, сервера?{p=0.3}A. Да, безусловно! {w=0.3}Это лишь часть наших интересов. {w=0.3}К сожалению, многие «аномалии» на проверку оказываются пустышками и фейками, но иногда нам везёт. {w=0.3}Все интересные находки мы публикуем и обсуждаем в соответствующих топиках на форуме. {w=0.3}Наша работа открытая."
     prolegomena "{p=1}\n\n\nА что насчёт тех файлов, что вы оставляете при себе?"
     stop music
-    viewer "old2023/images/password_ACT_1.png" wait
+    viewer "old2023/images/documents/password_ACT_1.png" wait
     pause 1
     jump game

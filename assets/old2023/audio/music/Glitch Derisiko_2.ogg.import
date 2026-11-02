@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://x3wyva8yjweu"
+path="res://.godot/imported/Glitch Derisiko_2.ogg-ac4b77bdad5927f8a9f1c82fc7d2829a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/old2023/audio/music/Glitch Derisiko_2.ogg"
+dest_files=["res://.godot/imported/Glitch Derisiko_2.ogg-ac4b77bdad5927f8a9f1c82fc7d2829a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

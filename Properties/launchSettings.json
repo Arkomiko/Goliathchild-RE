@@ -1,0 +1,28 @@
+{
+  "profiles": {
+	"Игра": {
+	  "commandName": "Executable",
+	  "executablePath": "E:\\Game Engine\\Godot Engine\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64.exe",
+	  "commandLineArgs": "--path .",
+	  "workingDirectory": "."
+	},
+	"Игра — сразу GiC_OS": {
+	  "commandName": "Executable",
+	  "executablePath": "E:\\Game Engine\\Godot Engine\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64.exe",
+	  "commandLineArgs": "--path . -- --open=editor",
+	  "workingDirectory": "."
+	},
+	"Редактор Godot": {
+	  "commandName": "Executable",
+	  "executablePath": "E:\\Game Engine\\Godot Engine\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64.exe",
+	  "commandLineArgs": "--path . --editor",
+	  "workingDirectory": "."
+	},
+	"Проверка сценария": {
+	  "commandName": "Executable",
+	  "executablePath": "E:\\Game Engine\\Godot Engine\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+	  "commandLineArgs": "--headless --path . -- --validate",
+	  "workingDirectory": "."
+	}
+  }
+}

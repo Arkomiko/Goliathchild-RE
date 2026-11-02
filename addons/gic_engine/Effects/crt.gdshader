@@ -2,9 +2,10 @@
 // Рисуется полупрозрачным поверх фона, сам по себе экран не читает — поэтому дешёвый.
 shader_type canvas_item;
 
-uniform float noise_amount : hint_range(0.0, 1.0) = 0.06;
-uniform float scanline_amount : hint_range(0.0, 1.0) = 0.12;
-uniform float vignette_amount : hint_range(0.0, 2.0) = 0.9;
+// Значения подобраны так, чтобы эффект только намекал на старый экран и не мешал разглядеть фон.
+uniform float noise_amount : hint_range(0.0, 1.0) = 0.025;
+uniform float scanline_amount : hint_range(0.0, 1.0) = 0.04;
+uniform float vignette_amount : hint_range(0.0, 2.0) = 0.5;
 uniform float scanline_count = 720.0;
 
 float rand(vec2 co) {
