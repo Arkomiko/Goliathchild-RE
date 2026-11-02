@@ -45,7 +45,8 @@ public sealed class StoryProject
     public StoryMeta Meta = new();
     public readonly List<ScriptDocument> Documents = new();
     public readonly Dictionary<string, LabelDef> Labels = new();
-    public readonly Dictionary<string, CharacterDef> Characters = new();
+    // Встроенный «centered» есть всегда, поэтому его можно использовать без объявления.
+    public readonly Dictionary<string, CharacterDef> Characters = new() { [CharacterDef.CenteredId] = CharacterDef.Centered() };
     public readonly List<VarDef> Variables = new();
     public readonly List<Diagnostic> Diagnostics = new();
 
@@ -127,7 +128,8 @@ public sealed class StoryProject
             }
             foreach (var ch in doc.Characters)
             {
-                if (Characters.ContainsKey(ch.Id))
+                // Замена встроенного centered своим объявлением — не повтор, предупреждать не о чем.
+                if (Characters.TryGetValue(ch.Id, out var known) && known.Line > 0)
                 {
                     Warn(DiagnosticSeverity.Warning, ch.File, ch.Line, $"Персонаж «{ch.Id}» объявлен повторно");
                 }
@@ -197,6 +199,8 @@ public sealed class StoryProject
 
     private void CheckAsset(string path, Command cmd)
     {
+        // Цвет вместо файла (scene "#ffffff") проверять на диске не нужно.
+        if (CharacterDef.IsColorPath(path)) return;
         if (!AssetExists(path)) Warn(DiagnosticSeverity.Warning, cmd.File, cmd.Line, $"Файл не найден: {path}");
     }
 

@@ -231,7 +231,8 @@ public sealed class StoryPlayer
 
             case SceneCommand scene:
                 State.Presentation.Scene = scene.Path;
-                if (scene.Path != null) ImageShown?.Invoke(scene.Path);
+                // Сплошной цвет — не картинка, в галерею его не записываем.
+                if (scene.Path != null && !CharacterDef.IsColorPath(scene.Path)) ImageShown?.Invoke(scene.Path);
                 Block(done => Presenter.SetScene(scene.Path, scene.Transition, scene.Time, done), scene.Transition != "none");
                 break;
 

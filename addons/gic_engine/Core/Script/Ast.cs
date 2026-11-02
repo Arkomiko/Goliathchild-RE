@@ -218,6 +218,17 @@ public sealed class EndCommand : Command
 /// <summary>Описание персонажа (команда character).</summary>
 public sealed class CharacterDef
 {
+    /// <summary>
+    /// Встроенный рассказчик «centered», как в Ren'Py: реплика по центру экрана, без окна.
+    /// Объявлять его не нужно; объявление с тем же id в сценарии заменит встроенное.
+    /// </summary>
+    public const string CenteredId = "centered";
+
+    public static CharacterDef Centered() => new() { Id = CenteredId, Name = "", File = "", Line = 0 };
+
+    /// <summary>Фон-цвет вместо картинки: scene "#ffffff". Нужен для заставок с текстом по центру.</summary>
+    public static bool IsColorPath(string path) => path != null && path.StartsWith("#");
+
     public string Id;
     // Имя может содержать подстановку переменных, например "[doc]" — тогда в заголовке окна будет имя документа.
     public string Name;

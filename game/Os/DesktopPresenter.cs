@@ -73,6 +73,12 @@ public partial class DesktopPresenter : Control, IStoryPresenter
     private Label _folderPath;
     private Control _modal;
 
+    // ---- реплики по центру экрана (centered): заставки без окна, текст плавно появляется и гаснет
+    private const float CenteredFadeIn = 1.2f;
+    private const float CenteredFadeOut = 0.8f;
+    private RichTextLabel _centered;
+    private Tween _centeredTween;
+
     // ---- звук
     private readonly Dictionary<string, AudioStreamPlayer> _channels = new();
     private readonly Dictionary<string, string> _playing = new();
@@ -110,6 +116,7 @@ public partial class DesktopPresenter : Control, IStoryPresenter
         BuildDocument();
         BuildViewer();
         BuildFolder();
+        BuildCentered();
         BuildEffects();
         BuildAudio();
     }
@@ -267,6 +274,28 @@ public partial class DesktopPresenter : Control, IStoryPresenter
         _windowLayer.AddChild(_folder);
     }
 
+    /// <summary>Слой для реплик centered: поверх окон, но под глитчем и вспышками.</summary>
+    private void BuildCentered()
+    {
+        var center = _shake.Add(UiKit.Full(new CenterContainer { MouseFilter = MouseFilterEnum.Ignore }));
+        _centered = new RichTextLabel
+        {
+            BbcodeEnabled = true,
+            FitContent = true,
+            ScrollActive = false,
+            AutowrapMode = TextServer.AutowrapMode.WordSmart,
+            CustomMinimumSize = new Vector2(1800, 0),
+            MouseFilter = MouseFilterEnum.Ignore,
+            Visible = false,
+        };
+        _centered.AddThemeFontOverride("normal_font", Fonts.Body);
+        _centered.AddThemeFontOverride("bold_font", Fonts.BodyBold);
+        _centered.AddThemeFontSizeOverride("normal_font_size", 60);
+        _centered.AddThemeFontSizeOverride("bold_font_size", 60);
+        _centered.AddThemeConstantOverride("line_separation", 18);
+        center.AddChild(_centered);
+    }
+
     private void BuildEffects()
     {
         _flash = UiKit.Full(new ColorRect { Color = new Color(1, 1, 1, 0), MouseFilter = MouseFilterEnum.Ignore, Visible = false });
@@ -325,6 +354,7 @@ public partial class DesktopPresenter : Control, IStoryPresenter
         RefreshDesktop(state.Desktop);
         _doc.Visible = false;
         _typer.ClearText();
+        HideCentered();
     }
 
     public void CancelPending()
@@ -339,11 +369,18 @@ public partial class DesktopPresenter : Control, IStoryPresenter
         _typer.Stop();
         StopVoice();
         CloseModal();
+        HideCentered();
         if (_effectDone != null || _effectLeft > 0) EndEffect(false);
     }
 
     public void Say(SayRequest request, Action done)
     {
+        if (IsCentered(request))
+        {
+            SayCentered(request, done);
+            return;
+        }
+        HideCentered();
         _say = request;
         _sayDone = done;
         _sayShown = false;
@@ -385,15 +422,17 @@ public partial class DesktopPresenter : Control, IStoryPresenter
             }));
             return;
         }
-        // dissolve: новая картинка проявляется поверх старой.
-        var next = new TextureRect
-        {
-            Texture = LoadTexture(path),
-            ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
-            StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
-            MouseFilter = MouseFilterEnum.Ignore,
-            Modulate = new Color(1, 1, 1, 0),
-        };
+        // dissolve: новая картинка (или сплошной цвет) проявляется поверх старой.
+        Control next = CharacterDef.IsColorPath(path)
+            ? new ColorRect { Color = Color.FromString(path, Colors.Black) }
+            : new TextureRect
+            {
+                Texture = LoadTexture(path),
+                ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+                StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
+            };
+        next.MouseFilter = MouseFilterEnum.Ignore;
+        next.Modulate = new Color(1, 1, 1, 0);
         _sceneLayer.AddChild(UiKit.Full(next));
         var tween = CreateTween();
         tween.TweenProperty(next, "modulate:a", 1f, time);
@@ -706,6 +745,12 @@ public partial class DesktopPresenter : Control, IStoryPresenter
             return;
         }
         if (_sayDone == null) return;
+        // Клик во время проявления centered-реплики показывает её сразу целиком.
+        if (IsCentered(_say) && !_sayShown)
+        {
+            RevealCentered();
+            return;
+        }
         if (_typer.IsTyping)
         {
             _typer.Advance();
@@ -746,6 +791,10 @@ public partial class DesktopPresenter : Control, IStoryPresenter
         else if (_sayDone != null && _typer.IsTyping && CanSkip())
         {
             _typer.RevealAll();
+        }
+        else if (_sayDone != null && IsCentered(_say) && CanSkip())
+        {
+            RevealCentered();
         }
 
         UpdateEffect(delta);
@@ -796,11 +845,94 @@ public partial class DesktopPresenter : Control, IStoryPresenter
     private void CompleteSay()
     {
         var done = _sayDone;
+        var centered = IsCentered(_say);
+        var skipping = CanSkip();
         _sayDone = null;
         _say = null;
         _sayShown = false;
         StopVoice();
+        // Centered-реплика сначала плавно гаснет, и только потом история идёт дальше
+        // (при пропуске — сразу). Пока она гаснет, _sayDone пуст и клики ничего не делают.
+        if (centered && !skipping)
+        {
+            var token = _token;
+            _centeredTween?.Kill();
+            _centeredTween = CreateTween();
+            _centeredTween.TweenProperty(_centered, "modulate:a", 0f, CenteredFadeOut).SetTrans(Tween.TransitionType.Sine);
+            _centeredTween.TweenCallback(Callable.From(() =>
+            {
+                _centered.Visible = false;
+                if (token == _token) done?.Invoke();
+            }));
+            return;
+        }
+        if (centered) HideCentered();
         done?.Invoke();
+    }
+
+    // =================================================================== реплики по центру
+
+    private static bool IsCentered(SayRequest request) => request?.Character?.Id == CharacterDef.CenteredId;
+
+    /// <summary>
+    /// Реплика centered: без окна-документа и без печати по буквам — весь текст плавно проявляется по центру экрана.
+    /// Цвет букв подбирается к фону: на светлом сплошном фоне — чёрный, иначе белый.
+    /// </summary>
+    private void SayCentered(SayRequest request, Action done)
+    {
+        _say = request;
+        _sayDone = done;
+        _sayShown = false;
+        _markup = TextMarkup.Parse(request.Text, Lookup);
+        _doc.Visible = false;
+        _typer.ClearText();
+
+        _centeredTween?.Kill();
+        _centered.Text = "[center]" + _markup.Bbcode + "[/center]";
+        _centered.AddThemeColorOverride("default_color", CenteredInk());
+        _centered.Modulate = new Color(1, 1, 1, 0);
+        _centered.Visible = true;
+
+        if (CanSkip())
+        {
+            RevealCentered();
+            return;
+        }
+        var token = _token;
+        _centeredTween = CreateTween();
+        _centeredTween.TweenProperty(_centered, "modulate:a", 1f, CenteredFadeIn).SetTrans(Tween.TransitionType.Sine);
+        _centeredTween.TweenCallback(Callable.From(() =>
+        {
+            if (token == _token && IsCentered(_say)) OnCenteredShown();
+        }));
+    }
+
+    private void RevealCentered()
+    {
+        _centeredTween?.Kill();
+        _centered.Modulate = Colors.White;
+        OnCenteredShown();
+    }
+
+    private void OnCenteredShown()
+    {
+        if (_sayShown) return;
+        _sayShown = true;
+        _autoLeft = SettingsManager.Instance.AutoDelay + (_markup?.CharCount ?? 0) * 0.02;
+        if (_markup is { NoWait: true }) CompleteSay();
+    }
+
+    private void HideCentered()
+    {
+        _centeredTween?.Kill();
+        _centeredTween = null;
+        _centered.Visible = false;
+    }
+
+    private Color CenteredInk()
+    {
+        if (_sceneImage.Texture == null && _sceneColor.Color.Luminance > 0.5f) return Colors.Black;
+        return Colors.White;
     }
 
     private bool CanSkip() =>
@@ -946,6 +1078,13 @@ public partial class DesktopPresenter : Control, IStoryPresenter
 
     private void SetSceneTexture(string path)
     {
+        // scene "#ffffff" — сплошной цвет вместо картинки (заставки с текстом по центру).
+        if (CharacterDef.IsColorPath(path))
+        {
+            _sceneImage.Texture = null;
+            _sceneColor.Color = Color.FromString(path, Colors.Black);
+            return;
+        }
         _sceneImage.Texture = path != null ? LoadTexture(path) : null;
         _sceneColor.Color = Colors.Black;
     }
