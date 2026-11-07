@@ -77,7 +77,7 @@ language/                 переводы интерфейса: ru.json, en.jso
 tools/rpy2gics.py         конвертер сценария Ren'Py → .gics
 docs/                     решения, формат сценариев, разбор оригинала
 Properties/               профили запуска для Visual Studio
-OLD/                      архив оригинала 2023 (в git только OLD/README.md)
+.claude/old_gc/           исходники оригинала и документы сценаристки (только локально, в git не попадают)
 ```
 
 Подробнее: решения — [docs/DECISIONS.md](docs/DECISIONS.md), формат сценариев — [docs/GICS_FORMAT.md](docs/GICS_FORMAT.md),

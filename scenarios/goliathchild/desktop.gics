@@ -20,7 +20,7 @@ label boot:
     show bios "old2023/images/screens/bios1.png"
     pause 3.0
     hide bios
-    call desktop_setup
+    call hub_setup
     jump game
 
 # Иконки, папки архивов и файлы в них. Вызывается через call, поэтому заканчивается return.

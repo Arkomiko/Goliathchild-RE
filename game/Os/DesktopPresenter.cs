@@ -20,6 +20,7 @@ public partial class DesktopPresenter : Control, IStoryPresenter
     // Ассеты прототипа нарисованы под 1280×720, игра — 2560×1440: увеличиваем их ровно в 2 раза.
     private const float OldScale = 2f;
     private const int TaskbarHeight = 72;
+    private const int IconCaptionWidth = 216;
 
     /// <summary>История нужна, чтобы превращать пути из сценария в настоящие пути к файлам.</summary>
     public StoryProject Project;
@@ -980,8 +981,24 @@ public partial class DesktopPresenter : Control, IStoryPresenter
             button.MouseExited += () => button.Modulate = Colors.White;
             var captured = icon;
             button.Pressed += () => OnIconPressed(captured.Error, captured.Action);
-            (icon.Side == "right" ? _rightIcons : _leftIcons).AddChild(button);
+            (icon.Side == "right" ? _rightIcons : _leftIcons).AddChild(WithCaption(button, icon));
         }
+    }
+
+    /// <summary>Добавляет подпись под иконкой: в иконках прототипа она уже нарисована на картинке.</summary>
+    private static Control WithCaption(Control button, DesktopIcon icon)
+    {
+        if (icon.Image == null || icon.Image.Contains("old2023/")) return button;
+        var column = UiKit.VBox(2);
+        column.CustomMinimumSize = new Vector2(IconCaptionWidth, 0);
+        button.SizeFlagsHorizontal = SizeFlags.ShrinkCenter;
+        column.Add(button);
+        var caption = UiKit.Label(icon.Title, Fonts.Pixel, 32, Colors.White);
+        caption.HorizontalAlignment = HorizontalAlignment.Center;
+        caption.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+        caption.TextureFilter = TextureFilterEnum.Nearest;
+        column.Add(caption);
+        return column;
     }
 
     private void RebuildFolder()

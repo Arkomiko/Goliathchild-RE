@@ -12,6 +12,7 @@
 	"readOnly": true,
 	"chapters": [
 		{ "id": "prologue", "title": "Пролог", "label": "start" },
+		{ "id": "hub", "title": "Кроличья нора", "label": "chapter_hub" },
 		{ "id": "act1", "title": "Акт I", "label": "chapter_act1" },
 		{ "id": "act2", "title": "Акт II", "label": "chapter_act2" },
 		{ "id": "act3", "title": "Акт III", "label": "chapter_act3" }
